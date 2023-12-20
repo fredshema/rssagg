@@ -1,0 +1,22 @@
+version: "3"
+silent: true
+dotenv: [".env"]
+tasks:
+  build:
+    cmds:
+      - echo "Building..."
+      - go build
+  run:
+    cmds:
+      - echo "Running..."
+      - go build && ./rssagg
+  migrate:
+    cmds:
+      - echo "Migrating..."
+      - goose -dir sql/schema postgres $DB_URL up
+      - echo "Migrated!"
+  generate:
+    cmds:
+      - echo "Generating..."
+      - sqlc generate
+      - echo "Generated!"
